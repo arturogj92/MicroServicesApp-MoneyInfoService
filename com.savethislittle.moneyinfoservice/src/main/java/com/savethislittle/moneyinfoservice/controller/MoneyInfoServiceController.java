@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.savethislittle.moneyinfoservice.dto.User;
 import com.savethislittle.moneyinfoservice.proxy.UserRepositoryInfo;
+import com.savethislittle.moneyinfoservice.service.MoneyInfoService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController	
 public class MoneyInfoServiceController {
 
-//	MoneyInfoService moneyInfoService;
+
 //
 //	@RequestMapping("/user/feign/{email}")
 //	public User findme(@PathVariable String email) {
@@ -25,12 +26,20 @@ public class MoneyInfoServiceController {
 	
 	@Autowired
 	UserRepositoryInfo userRepositoryInfo;
+	@Autowired
+	MoneyInfoService moneyInfoService;
 
 	@RequestMapping("/user/{email}")
 	public User getUserByEmail(@PathVariable String email) {
 		log.info("ACTION: getUserByEmail INPUT: => {}", email);
 		return userRepositoryInfo.findByEmail(email);
 		
+	}
+	
+	@RequestMapping("/expenses/{email}")
+	public double getCurrentMoney(@PathVariable String email) {
+		log.info("ACTION: getCurrentMoney INPUT: => {}", email);
+		return moneyInfoService.currentMoney(email);
 	}
 
 }

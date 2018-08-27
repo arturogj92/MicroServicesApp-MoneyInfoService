@@ -1,5 +1,7 @@
 package com.savethislittle.moneyinfoservice.proxy;
 
+import java.util.List;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,5 +16,5 @@ public interface UserRepositoryInfo {
 	public User findByEmail(@PathVariable(value = "email") String email);
 	
 	@RequestMapping("/expenses/{email}")
-	public Expenses  findExpensesByEmail(@PathVariable(value = "email") String email);
+	public List<Expenses>  findExpensesByEmail(@PathVariable(value = "email") String email);
 }
