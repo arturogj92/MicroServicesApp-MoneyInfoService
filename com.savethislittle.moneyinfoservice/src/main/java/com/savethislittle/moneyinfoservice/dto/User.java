@@ -1,15 +1,13 @@
 package com.savethislittle.moneyinfoservice.dto;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@Service
+@Component
 public class User {
 
 	private Long id;

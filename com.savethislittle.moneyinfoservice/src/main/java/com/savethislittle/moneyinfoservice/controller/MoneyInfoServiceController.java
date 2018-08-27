@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.savethislittle.moneyinfoservice.dto.User;
 import com.savethislittle.moneyinfoservice.proxy.UserRepositoryInfo;
-import com.savethislittle.moneyinfoservice.service.MoneyInfoService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,11 +23,14 @@ public class MoneyInfoServiceController {
 //		return moneyInfoService.findByEmail(email);
 //	}
 	
+	@Autowired
 	UserRepositoryInfo userRepositoryInfo;
 
 	@RequestMapping("/user/{email}")
-	public User findme(@PathVariable String email) {
+	public User getUserByEmail(@PathVariable String email) {
+		log.info("ACTION: getUserByEmail INPUT: => {}", email);
 		return userRepositoryInfo.findByEmail(email);
+		
 	}
 
 }

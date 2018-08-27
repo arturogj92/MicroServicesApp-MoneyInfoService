@@ -1,6 +1,6 @@
 package com.savethislittle.moneyinfoservice.dto;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-@Service
+@Component
 public class EconomyInfo {
 
 	private Long id;
