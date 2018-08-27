@@ -31,14 +31,28 @@ public class MoneyInfoServiceImpl implements MoneyInfoService {
 		User findByEmail = userRepositoryInfo.findByEmail(email);
 		double money = findByEmail.getEconomyInfo().getCurrentMoney();
 		List<Expenses> expensesByEmail = userRepositoryInfo.findExpensesByEmail(email);
-		double sum=0.0;
-		
-		for(Expenses expense : expensesByEmail){
-			sum+=expense.getAmount();
+		double sum = 0.0;
+
+		for (Expenses expense : expensesByEmail) {
+			sum += expense.getAmount();
+		}
+
+		return money - sum;
+	}
+
+	@Override
+	public Expenses highestExpense(String email) {
+		List<Expenses> expensesByEmail = userRepositoryInfo.findExpensesByEmail(email);
+		Expenses highestExpense = null;
+		double highestAmount = 0.00;
+		for (Expenses expense : expensesByEmail) {
+			if(expense.getAmount()>=highestAmount) {
+				highestAmount=expense.getAmount();
+				highestExpense = expense;
+			}
 		}
 		
-		
-		return money-sum;
+		return highestExpense;
 	}
 
 }

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.savethislittle.moneyinfoservice.dto.Expenses;
 import com.savethislittle.moneyinfoservice.dto.User;
 import com.savethislittle.moneyinfoservice.proxy.UserRepositoryInfo;
 import com.savethislittle.moneyinfoservice.service.MoneyInfoService;
@@ -41,5 +42,11 @@ public class MoneyInfoServiceController {
 		log.info("ACTION: getCurrentMoney INPUT: => {}", email);
 		return moneyInfoService.currentMoney(email);
 	}
+	
+	@RequestMapping("/highestexpense/{email}")
+	public Expenses getHighestExpense(@PathVariable String email) {
+		return moneyInfoService.highestExpense(email);
+	}
+	
 
 }
