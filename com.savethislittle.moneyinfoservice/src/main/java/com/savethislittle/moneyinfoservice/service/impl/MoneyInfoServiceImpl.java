@@ -1,5 +1,6 @@
 package com.savethislittle.moneyinfoservice.service.impl;
 
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -54,5 +55,23 @@ public class MoneyInfoServiceImpl implements MoneyInfoService {
 		
 		return highestExpense;
 	}
+
+	@Override
+	public List<Expenses> sortHighestExpensesByCategory(String category, String email) {
+		List<Expenses> expensesByEmail = userRepositoryInfo.searchExpenseByCategoryAndMail(email, category);
+		expensesByEmail.sort(Comparator.comparing(Expenses::getAmount).reversed());
+		return expensesByEmail;
+	}
+
+//	@Override
+//	public List<Expenses> sortHighestExpensesByCategory(String category, String email) {
+//		List<Expenses> expensesByEmail = userRepositoryInfo.searchExpenseByCategoryAndMail(email, category);
+//		List<Expenses> sortedExpenses = expensesByEmail.sort(Comparator.comparing(expensesByEmail::category));
+//		return null;
+//	}
+	
+	
+//	list.sort(Comparator.comparing(AnObject::getAttr));
+	
 
 }
