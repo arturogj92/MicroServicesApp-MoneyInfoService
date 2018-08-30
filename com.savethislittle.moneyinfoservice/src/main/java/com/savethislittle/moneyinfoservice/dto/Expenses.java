@@ -1,6 +1,6 @@
 package com.savethislittle.moneyinfoservice.dto;
 
-import java.time.LocalDate;
+
 
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,8 @@ public class Expenses {
 	
 	private Long id;
 	private String type;
-	private LocalDate date;
+	private String year;
+	private String month;
 	private String category;
 	private String subCategory;
 	private String note;
