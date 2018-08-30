@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.savethislittle.moneyinfoservice.dto.Expenses;
+import com.savethislittle.moneyinfoservice.dto.TopExpensesView;
 import com.savethislittle.moneyinfoservice.dto.User;
 
 @FeignClient("userinfo-repository")
@@ -27,5 +28,9 @@ public interface UserRepositoryInfo {
 	public ResponseEntity<Void> updateExpenses(@Valid @RequestBody Expenses expense);
 
 	@RequestMapping("/expenses/{email}/{category}")
-	public List<Expenses> searchExpenseByCategoryAndMail(@PathVariable(value="email") String email, @PathVariable(value="category") String category);
+	public List<Expenses> searchExpenseByCategoryAndMail(@PathVariable(value="email") String email, @PathVariable(value="category") String category);   
+		
+	@RequestMapping("/totalamountcategory/{email}")
+	public List<TopExpensesView> findTopExpensesByEmail(@PathVariable(value="email") String email);	
+		
 }

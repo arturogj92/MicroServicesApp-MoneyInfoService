@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.savethislittle.moneyinfoservice.dto.Expenses;
+import com.savethislittle.moneyinfoservice.dto.TopExpensesView;
 import com.savethislittle.moneyinfoservice.dto.User;
 import com.savethislittle.moneyinfoservice.proxy.UserRepositoryInfo;
 import com.savethislittle.moneyinfoservice.service.MoneyInfoService;
@@ -27,11 +28,6 @@ import lombok.extern.slf4j.Slf4j;
 public class MoneyInfoServiceController {
 
 
-//
-//	@RequestMapping("/user/feign/{email}")
-//	public User findme(@PathVariable String email) {
-//		return moneyInfoService.findByEmail(email);
-//	}
 	
 	@Autowired
 	UserRepositoryInfo userRepositoryInfo;
@@ -45,7 +41,7 @@ public class MoneyInfoServiceController {
 		
 	}
 	
-	@RequestMapping("/expenses/{email}")
+	@RequestMapping("/money/{email}")
 	public double getCurrentMoney(@PathVariable String email) {
 		log.info("ACTION: getCurrentMoney INPUT: => {}", email);
 		return moneyInfoService.currentMoney(email);
@@ -71,5 +67,9 @@ public class MoneyInfoServiceController {
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
+	@RequestMapping("/highestexpensedcategory/{email}")
+	public TopExpensesView getHighestExpensedCategory(@PathVariable String email) {
+		return moneyInfoService.getHighestExpensedCategory(email);
+	}
 
 }
