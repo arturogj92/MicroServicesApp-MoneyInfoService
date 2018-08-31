@@ -10,13 +10,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @Component
-public class Expenses {
+public class SumAmountExpensesMonthYear {
 
 	
 	private Long id;
 	private String type;
 	private String year;
 	private String month;
+	private String day;
 	private String category;
 	private String subCategory;
 	private String note;

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.savethislittle.moneyinfoservice.dto.Expenses;
+import com.savethislittle.moneyinfoservice.dto.SumAmountExpensesMonthYear;
 import com.savethislittle.moneyinfoservice.dto.TopExpensesView;
 import com.savethislittle.moneyinfoservice.dto.User;
 import com.savethislittle.moneyinfoservice.proxy.UserRepositoryInfo;
@@ -32,10 +32,10 @@ public class MoneyInfoServiceImpl implements MoneyInfoService {
 	public double currentMoney(String email) {
 		User findByEmail = userRepositoryInfo.findByEmail(email);
 		double money = findByEmail.getEconomyInfo().getCurrentMoney();
-		List<Expenses> expensesByEmail = userRepositoryInfo.findExpensesByEmail(email);
+		List<SumAmountExpensesMonthYear> expensesByEmail = userRepositoryInfo.findExpensesByEmail(email);
 		double sum = 0.0;
 
-		for (Expenses expense : expensesByEmail) {
+		for (SumAmountExpensesMonthYear expense : expensesByEmail) {
 			sum += expense.getAmount();
 		}
 
@@ -43,11 +43,11 @@ public class MoneyInfoServiceImpl implements MoneyInfoService {
 	}
 
 	@Override
-	public Expenses highestExpense(String email) {
-		List<Expenses> expensesByEmail = userRepositoryInfo.findExpensesByEmail(email);
-		Expenses highestExpense = null;
+	public SumAmountExpensesMonthYear highestExpense(String email) {
+		List<SumAmountExpensesMonthYear> expensesByEmail = userRepositoryInfo.findExpensesByEmail(email);
+		SumAmountExpensesMonthYear highestExpense = null;
 		double highestAmount = 0.00;
-		for (Expenses expense : expensesByEmail) {
+		for (SumAmountExpensesMonthYear expense : expensesByEmail) {
 			if(expense.getAmount()>=highestAmount) {
 				highestAmount=expense.getAmount();
 				highestExpense = expense;
@@ -58,9 +58,9 @@ public class MoneyInfoServiceImpl implements MoneyInfoService {
 	}
 
 	@Override
-	public List<Expenses> sortHighestExpensesByCategory(String category, String email) {
-		List<Expenses> expensesByEmail = userRepositoryInfo.searchExpenseByCategoryAndMail(email, category);
-		expensesByEmail.sort(Comparator.comparing(Expenses::getAmount).reversed());
+	public List<SumAmountExpensesMonthYear> sortHighestExpensesByCategory(String category, String email) {
+		List<SumAmountExpensesMonthYear> expensesByEmail = userRepositoryInfo.searchExpenseByCategoryAndMail(email, category);
+		expensesByEmail.sort(Comparator.comparing(SumAmountExpensesMonthYear::getAmount).reversed());
 		return expensesByEmail;
 	}
 
